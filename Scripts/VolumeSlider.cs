@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,32 +11,35 @@ public class VolumeSlider : MonoBehaviour
     Slider slider;
     [SerializeField] SliderKind kind;
     float value;
-
-    void Start()
+    [SerializeField]bool dodat = false;
+    public void Setup()
     {
         slider = GetComponent<Slider>();
         switch (kind)
         {
-            case SliderKind.Music:
-                AudioManager.instance.mixer.GetFloat("MusicVol", out value);
-                break;
             case SliderKind.Effect:
                 AudioManager.instance.mixer.GetFloat("EffectVol", out value);
                 break;
+            case SliderKind.Music:
+                AudioManager.instance.mixer.GetFloat("MusicVol", out value);
+                break;
+
         }
-        slider.value = DBToNormalized(value); 
+        slider.value = DBToNormalized(value);
+        dodat = true;
     }
     float DBToNormalized(float dB)
     {
+
         float minDB = -80f;
-        float maxDB = 0f;
+        float maxDB = 20f;
 
         dB = Mathf.Clamp(dB, minDB, maxDB);
         return (dB - minDB) / (maxDB - minDB);
     }
     public void OnValueChange()
     {
-        Debug.Log("called");
+        if (!dodat) return;
         switch (kind)
         {
             case SliderKind.Music:
