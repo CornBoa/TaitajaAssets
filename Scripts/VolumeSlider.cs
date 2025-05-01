@@ -30,12 +30,7 @@ public class VolumeSlider : MonoBehaviour
     }
     float DBToNormalized(float dB)
     {
-
-        float minDB = -80f;
-        float maxDB = 20f;
-
-        dB = Mathf.Clamp(dB, minDB, maxDB);
-        return (dB - minDB) / (maxDB - minDB);
+        return Mathf.Pow(10, dB / 20f);
     }
     public void OnValueChange()
     {
