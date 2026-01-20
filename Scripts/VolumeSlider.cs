@@ -12,9 +12,15 @@ public class VolumeSlider : MonoBehaviour
     [SerializeField] SliderKind kind;
     float value;
     [SerializeField]bool dodat = false;
-    public void Setup()
+    private void Start()
     {
         slider = GetComponent<Slider>();
+        Setup();
+        slider.onValueChanged.AddListener(delegate { OnValueChange(); });
+    }
+    public void Setup()
+    {
+       
         switch (kind)
         {
             case SliderKind.Effect:
@@ -25,7 +31,7 @@ public class VolumeSlider : MonoBehaviour
                 break;
 
         }
-        slider.value = DBToNormalized(value);
+        slider.value = DBToNormalized(value);      
         dodat = true;
     }
     float DBToNormalized(float dB)
