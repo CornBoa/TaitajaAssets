@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 public class FancyButtons : MonoBehaviour
 {
-    [SerializeField]AudioClip buttonClickSound;
+    public AudioClip buttonClickSound;
     void Start()
     {
         foreach(Button brn in FindObjectsByType<Button>(FindObjectsSortMode.None))

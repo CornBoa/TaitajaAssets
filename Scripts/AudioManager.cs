@@ -21,7 +21,11 @@ public class AudioManager : MonoBehaviour
         }
     }
     void Start()
-    {
+    {       
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Music")[0];
+        effectSource = gameObject.AddComponent<AudioSource>();
+        effectSource.outputAudioMixerGroup = mixer.FindMatchingGroups("Effects")[0];
         PlayMusic(musicClip);
     }
     public void PlayMusic(AudioClip clip)

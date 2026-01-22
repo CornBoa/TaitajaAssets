@@ -9,18 +9,17 @@ public class VolumeSlider : MonoBehaviour
         Music,Effect
     }
     Slider slider;
-    [SerializeField] SliderKind kind;
+    public SliderKind kind;
     float value;
-    [SerializeField]bool dodat = false;
+    [SerializeField]bool dodat = true;
     private void Start()
     {
-        slider = GetComponent<Slider>();
+        Debug.Log(AudioManager.instance);
         Setup();
-        slider.onValueChanged.AddListener(delegate { OnValueChange(); });
     }
     public void Setup()
     {
-       
+        slider = GetComponent<Slider>();
         switch (kind)
         {
             case SliderKind.Effect:
@@ -31,14 +30,14 @@ public class VolumeSlider : MonoBehaviour
                 break;
 
         }
-        slider.value = DBToNormalized(value);      
+        slider.value = DBToNormalized(value);
         dodat = true;
     }
     float DBToNormalized(float dB)
     {
         return Mathf.Pow(10, dB / 20f);
     }
-    public void OnValueChange()
+    public void OnValueChange(float f)
     {
         if (!dodat) return;
         switch (kind)

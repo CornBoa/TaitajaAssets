@@ -9,7 +9,7 @@ public class FadeInOut : MonoBehaviour
     bool fadeIn,fadeOut;
     public bool fadeInOnStart;
     public UnityEvent onFadeIn,onFadeOut;
-    [SerializeField] float fadingTime,Timer;
+    public float fadingTime,Timer;
     [SerializeField] Color transparent,og;
     void Start()
     {
