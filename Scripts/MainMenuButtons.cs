@@ -3,13 +3,19 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuButtons : MonoBehaviour
 {
+    FadeInOut fadeInOut;
     private void Start()
     {
-        FindFirstObjectByType<FadeInOut>().FadeIn();
+        fadeInOut = FindFirstObjectByType<FadeInOut>();
     }
     public void Play()
     {
-        SceneManager.LoadScene(1);
+        fadeInOut.onFadeOut.AddListener(delegate { LoadScene(1); });
+        fadeInOut.FadeOut();
+    }
+    public void LoadScene(int index)
+    {
+        SceneManager.LoadScene(index);
     }
     public void Quit()
     {
@@ -17,6 +23,12 @@ public class MainMenuButtons : MonoBehaviour
     }
     public void MainMenu()
     {
-        SceneManager.LoadScene(0);
+        fadeInOut.onFadeOut.AddListener(delegate { LoadScene(0); });
+        fadeInOut.FadeOut();
+    }
+    public void Ded()
+    {
+        fadeInOut.onFadeOut.AddListener(delegate { LoadScene(2); });
+        fadeInOut.FadeOut();
     }
 }

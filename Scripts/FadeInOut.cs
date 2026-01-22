@@ -7,13 +7,20 @@ public class FadeInOut : MonoBehaviour
 {
     Image image;
     bool fadeIn,fadeOut;
-    [SerializeField]UnityEvent onFadeIn,onFadeOut;
+    public bool fadeInOnStart;
+    public UnityEvent onFadeIn,onFadeOut;
     [SerializeField] float fadingTime,Timer;
     [SerializeField] Color transparent,og;
     void Start()
     {
         image = GetComponent<Image>();
-        og = image.color;
+        image.raycastTarget = false;
+        og = Color.black;
+        image.color = og;
+        if (fadeInOnStart)
+        {
+            FadeIn();
+        }
     }
     void Update()
     {
