@@ -7,7 +7,7 @@ public class ButtonSelectVisual : MonoBehaviour, IPointerEnterHandler, IPointerE
     Button button;
     bool lerp;
     float timer;
-    [SerializeField] Vector3 desiredScale;
+    [SerializeField] Vector3 desiredScale = new Vector3(1.05f,1.05f);
     Vector3 ogScale;
     public void OnPointerEnter(PointerEventData eventData)
     {
